@@ -1,0 +1,16 @@
+.box {
+    height: 350px;
+    background-color: khaki;
+    margin: 50px 0;
+    font-size: 44px;
+    text-align: center;
+    line-height: 350px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.75s ease-in;
+  }
+  
+  .box--show{
+    opacity: 1;
+    transform: translateY(0);    
+  }
