@@ -13,9 +13,9 @@ const useOnBecomeVisible = (elRef) => {
             return
         }
 
-        observer.startListening(elRef.current, (isIntersecting) => {
+        observer.startListening(elRef.current, (el, isIntersecting) => {
 
-            console.log(`intersecting box ${elRef.current.innerText}: ${isIntersecting}`)
+            console.log(`intersecting box ${el.innerText}: ${isIntersecting}`)
             setIsVisible(isIntersecting)
         })
 

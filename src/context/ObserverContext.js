@@ -9,7 +9,7 @@ function ObserverProvider({ children }) {
     let options = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5
+        threshold: [0.1, 0.5]
     }
 
     let observerCallback = (entries, observer) => {
@@ -17,7 +17,13 @@ function ObserverProvider({ children }) {
         entries.forEach(entry => {
             // todo: what if no callback is found ?
             const callback = observerCallbacks.get(entry.target)
-            callback(entry.isIntersecting)
+            if (entry.intersectionRatio >= 0.5) {
+                callback(entry.target, true)
+            } else if (entry.intersectionRatio <= 0.1) {
+                callback(entry.target, false)
+            } else {
+                // somewhere between 0.1 and 0.5
+            }
         })
     }
 
