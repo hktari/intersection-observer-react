@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useObserver } from '../context/IntersectionObserverContext'
+import { useIntersectionObserver } from '../context/IntersectionObserverContext'
 
 const useIsOnScreen = (elRef) => {
 
     const [isOnScreen, setIsOnScreen] = useState(false)
 
-    const { observer } = useObserver()
+    const { observer } = useIntersectionObserver()
 
     useEffect(() => {
 

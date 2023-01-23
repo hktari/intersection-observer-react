@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import { useObserver } from '../context/IntersectionObserverContext'
+import { useIntersectionObserver } from '../context/IntersectionObserverContext'
 import useIsOnScreen from '../hooks/useIsOnScreen'
 
 import './Box.css'

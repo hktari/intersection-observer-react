@@ -55,6 +55,6 @@ function IntersectionObserverProvider({ children }) {
     );
 }
 
-export const useObserver = () => useContext(IntersectionObserverContext)
+export const useIntersectionObserver = () => useContext(IntersectionObserverContext)
 
 export default IntersectionObserverProvider
