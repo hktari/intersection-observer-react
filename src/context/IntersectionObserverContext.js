@@ -1,8 +1,8 @@
 import React, { Children, useContext, useRef } from "react";
 
-const ObserverContext = React.createContext({});
+const IntersectionObserverContext = React.createContext({});
 
-function ObserverProvider({ children }) {
+function IntersectionObserverProvider({ children }) {
 
     let observerCallbacks = new Map()
 
@@ -49,12 +49,12 @@ function ObserverProvider({ children }) {
     }
 
     return (
-        <ObserverContext.Provider value={value}>
+        <IntersectionObserverContext.Provider value={value}>
             {children}
-        </ObserverContext.Provider>
+        </IntersectionObserverContext.Provider>
     );
 }
 
-export const useObserver = () => useContext(ObserverContext)
+export const useObserver = () => useContext(IntersectionObserverContext)
 
-export default ObserverProvider
+export default IntersectionObserverProvider

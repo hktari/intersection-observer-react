@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useObserver } from '../context/ObserverContext'
+import { useObserver } from '../context/IntersectionObserverContext'
 
 const useOnBecomeVisible = (elRef) => {
 
