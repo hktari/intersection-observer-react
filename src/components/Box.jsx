@@ -1,13 +1,13 @@
 import React, { useContext, useRef } from 'react'
 import { useObserver } from '../context/IntersectionObserverContext'
-import useOnBecomeVisible from '../hooks/useOnBecomeVisible'
+import useIsOnScreen from '../hooks/useIsOnScreen'
 
 import './Box.css'
 
 const Box = ({ children }) => {
 
     const box = useRef(null)
-    const isVisible = useOnBecomeVisible(box)
+    const isVisible = useIsOnScreen(box)
     
     return (
         <div ref={box} className={`box ${isVisible ? 'box--show' : ''}`}>

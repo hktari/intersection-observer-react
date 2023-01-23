@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useObserver } from '../context/IntersectionObserverContext'
 
-const useOnBecomeVisible = (elRef) => {
+const useIsOnScreen = (elRef) => {
 
-    const [isVisible, setIsVisible] = useState(false)
+    const [isOnScreen, setIsOnScreen] = useState(false)
 
     const { observer } = useObserver()
 
@@ -14,20 +14,18 @@ const useOnBecomeVisible = (elRef) => {
         }
 
         observer.startListening(elRef.current, (el, isIntersecting) => {
-
-            console.log(`intersecting box ${el.innerText}: ${isIntersecting}`)
-            setIsVisible(isIntersecting)
+            setIsOnScreen(isIntersecting)
         })
 
         return () => {
             if (elRef.current && observer) {
-                observer.stopListening(elRef.current, setIsVisible)
+                observer.stopListening(elRef.current, setIsOnScreen)
             }
         }
     }, [elRef.current, observer])
 
 
-    return isVisible
+    return isOnScreen
 }
 
-export default useOnBecomeVisible
+export default useIsOnScreen
