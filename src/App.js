@@ -6,7 +6,7 @@ import IntersectionObserverProvider from './context/IntersectionObserverContext'
 function App() {
   return (
     <>
-      <IntersectionObserverProvider>
+      <IntersectionObserverProvider options={{threshold: [0.1, 0.5]}}>
         <Box>1</Box>
         <Box>2</Box>
         <Box>3</Box>

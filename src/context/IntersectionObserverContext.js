@@ -2,41 +2,50 @@ import React, { Children, useContext, useRef } from "react";
 
 const IntersectionObserverContext = React.createContext({});
 
-function IntersectionObserverProvider({ children }) {
+const defaultOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: [0.1, 0.5]
+}
+
+function IntersectionObserverProvider({ children, options = defaultOptions }) {
 
     let observerCallbacks = new Map()
+    let observer = new IntersectionObserver(observerCallback, options);
 
-    let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: [0.1, 0.5]
-    }
+    function observerCallback(entries, observer) {
 
-    let observerCallback = (entries, observer) => {
-        console.log('processing intersction update...')
+        const thresholdLow = observer.thresholds[0]
+        const thresholdHigh = observer.thresholds[observer.thresholds.length - 1]
+        
         entries.forEach(entry => {
-            // todo: what if no callback is found ?
+            // there must be a callback for a given element, due to encapsulation of the IntersectionObserver object
             const callback = observerCallbacks.get(entry.target)
-            if (entry.intersectionRatio >= 0.5) {
+
+            if (entry.intersectionRatio >= thresholdHigh) {
                 callback(entry.target, true)
-            } else if (entry.intersectionRatio <= 0.1) {
+            } else if (entry.intersectionRatio <= thresholdLow) {
                 callback(entry.target, false)
             } else {
-                // somewhere between 0.1 and 0.5
+                // somewhere between thresholdLow and thresholdHigh
             }
         })
     }
 
-    let observer = new IntersectionObserver(observerCallback, options);
-
     const startListening = (el, callback) => {
-        console.log(`attaching observer ${el.innerText}`)
+        if (!callback) {
+            throw new Error(`callback must be defined. type is ${typeof callback}`)
+        }
+
         observer.observe(el)
         observerCallbacks.set(el, callback)
     }
 
     const stopListening = (el, callback) => {
-        console.log(`removing observer ${el.innerText}`)
+        if (!callback) {
+            throw new Error(`callback must be defined. type is ${typeof callback}`)
+        }
+
         observer.unobserve(el)
         observerCallbacks.delete(el)
     }
