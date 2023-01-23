@@ -8,6 +8,22 @@ const defaultOptions = {
     threshold: [0.1, 0.5]
 }
 
+/**
+ * Wraps the IntersectionObserver api. Child components subscribe to intersection changes
+ * by calling startListening() and stopListening().
+ * 
+ * Used in conjuction with the useIntersectionObserver() and useIsOnScreen() hooks.
+ * 
+ * default options:
+ *       {
+ *        root: null,
+ *        rootMargin: '0px',
+ *        threshold: [0.1, 0.5]
+ *       }
+ * 
+ * @param {IntersectionObserverInit | undefined} options 
+ * @returns 
+ */
 function IntersectionObserverProvider({ children, options = defaultOptions }) {
 
     let observerCallbacks = new Map()
